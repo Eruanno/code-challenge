@@ -1,7 +1,6 @@
 package com.codechallange.control;
 
-import com.codechallange.boundary.PostDTO;
-import com.codechallange.repository.Repository;
+import com.codechallange.boundary.dto.PostDTO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -18,7 +17,6 @@ public class PostingTest extends AbstractTest {
 
     @Before
     public void setup() {
-        Repository.cleanRepositories();
         TOO_LONG_MESSAGE = IntStream.range(0, 15).mapToObj(o -> TEN_DIGITS_STRING).collect(Collectors.joining());
     }
 

@@ -1,7 +1,6 @@
 package com.codechallange.control;
 
-import com.codechallange.boundary.PostDTO;
-import com.codechallange.repository.Repository;
+import com.codechallange.boundary.dto.PostDTO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,13 +9,11 @@ import java.util.List;
 
 public class FollowingTest extends AbstractTest {
 
-    @Before
-    public void setup() {
-        Repository.cleanRepositories();
-    }
-
     @Test
-    public void shouldReturnTimelineWithTwoMessagesInReverseChronoogicalOrder() throws InterruptedException {
+    public void shouldReturnTimelineWithTwoMessagesInReverseChronologicalOrder() {
+        userService.createUser(USER_1);
+        userService.createUser(USER_2);
+        userService.createUser(USER_3);
         postService.createPostForUser(USER_2, TEN_DIGITS_STRING);
         postService.createPostForUser(USER_3, TEN_DIGITS_STRING);
         userService.addFollowingUser(USER_1, USERNAME_2);

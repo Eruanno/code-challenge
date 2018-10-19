@@ -1,18 +1,39 @@
 package com.codechallange.repository.dao;
 
 import com.codechallange.entity.UserEntity;
-import com.codechallange.repository.Repository;
 
-public class UserDAO {
+import javax.annotation.PostConstruct;
+import javax.ejb.Startup;
+import javax.inject.Singleton;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
-    public static UserEntity addFollowingUser(String user, String username) {
-        UserEntity repoUser = Repository.getUserRepository().getUser(user);
-        repoUser.getFollowingUsers().add(username);
-        Repository.getUserRepository().updateUser(repoUser);
-        return repoUser;
+import static java.util.Objects.requireNonNull;
+
+@Startup
+@Singleton
+public class UserDAO implements Dao<UserEntity> {
+
+    private Map<String, UserEntity> map = new ConcurrentHashMap<>();
+
+    @PostConstruct
+    public void init() {}
+
+    @Override
+    public Optional<UserEntity> get(String id) {
+        return Optional.ofNullable(map.get(id));
     }
 
-    public static UserEntity findUserByUsername(String username) {
-        return Repository.getUserRepository().getUser(username);
+    @Override
+    public void create(UserEntity user) {
+        requireNonNull(user);
+        map.put(user.getUsername(), user);
+    }
+
+    @Override
+    public void update(UserEntity user) {
+        requireNonNull(user);
+        map.put(user.getUsername(), user);
     }
 }

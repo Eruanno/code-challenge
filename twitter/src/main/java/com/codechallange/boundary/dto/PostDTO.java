@@ -1,4 +1,4 @@
-package com.codechallange.boundary;
+package com.codechallange.boundary.dto;
 
 import java.util.Date;
 

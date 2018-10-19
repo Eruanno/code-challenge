@@ -1,29 +1,18 @@
 package com.codechallange.control;
 
-import com.codechallange.repository.Repository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.stream.IntStream;
 
 public class SublistTest extends AbstractTest {
 
     @Before
     public void setup() {
-        Repository.cleanRepositories();
-        IntStream.range(0, 15).forEach(i -> {
-            postService.createPostForUser(USER_1, Integer.toString(i));
-            sleep();
-        });
-    }
-
-    private void sleep() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        IntStream.range(0, 15).forEach(i -> postDAO.create(createPost(USERNAME_1, TEN_DIGITS_STRING, Date.from(Instant.now().minusMillis(1000*i)))));
     }
 
     @Test

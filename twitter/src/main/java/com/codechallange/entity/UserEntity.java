@@ -19,4 +19,10 @@ public class UserEntity {
     public Set<String> getFollowingUsers() {
         return followingUsers;
     }
+
+    public static UserEntity createNewUserEntity(String username) {
+        UserEntity user = new UserEntity();
+        user.setUsername(username);
+        return user;
+    }
 }

@@ -1,6 +1,11 @@
 package com.codechallange.control;
 
-import com.codechallange.boundary.UserDTO;
+import com.codechallange.boundary.dto.UserDTO;
+import com.codechallange.entity.PostEntity;
+import com.codechallange.repository.dao.PostDAO;
+import com.codechallange.repository.dao.UserDAO;
+
+import java.util.Date;
 
 abstract class AbstractTest {
     String USERNAME_1 = "test_user_1";
@@ -19,7 +24,20 @@ abstract class AbstractTest {
 
     String TEN_DIGITS_STRING = "0123456789";
 
-    PostService postService = new PostService();
+    UserDAO userDAO = new UserDAO();
 
-    UserService userService = new UserService();
+    PostDAO postDAO = new PostDAO();
+
+    PostService postService = new PostService(userDAO, postDAO);
+
+    UserService userService = new UserService(userDAO);
+
+    PostEntity createPost(String username, String message, Date date) {
+        PostEntity post = new PostEntity();
+        post.setUsername(username);
+        post.setMessage(message);
+        post.setDate(date);
+        post.setKey();
+        return post;
+    }
 }

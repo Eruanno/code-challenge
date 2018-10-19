@@ -1,5 +1,8 @@
 package com.codechallange.boundary;
 
+import com.codechallange.boundary.dto.TimelineDTO;
+import com.codechallange.boundary.dto.UserDTO;
+import com.codechallange.boundary.dto.WallDTO;
 import com.codechallange.control.PostService;
 import com.codechallange.control.UserService;
 
@@ -12,10 +15,10 @@ import java.net.URI;
 public class Main {
 
     @Inject
-    PostService postService;
+    private PostService postService;
 
     @Inject
-    UserService userService;
+    private UserService userService;
 
     @POST
     @Consumes("application/json")
